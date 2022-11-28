@@ -1,0 +1,56 @@
+.video-section{
+    height: 35rem;
+    width: 70rem;
+    margin-left: 15rem;
+    position: relative;
+    top: 5rem;
+}
+.video-header{
+    height: 85%;
+    margin: 5px;
+    box-shadow: 0 0 10px grey;
+    background-color: rgb(211, 211, 211);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5rem;
+}
+.video-footer{
+    height: 12%;
+    margin: 5px;
+    position: relative;
+    top: 1rem;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    gap: 20rem;
+    justify-content: space-around;
+}
+.video-footer .button-section{
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    right: 3.5rem;
+}
+.video-footer .button-section button{
+    border: none;
+    background-color:rgb(200, 140, 255);
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: 100;
+    transition: 0.2s;
+    box-shadow: 0px 0px 5px rgb(68, 68, 68);
+}
+.video-footer .button-section button:hover{
+    background-color:rgba(157, 63, 245, 0.733);
+    box-shadow: 0 0 3px black;
+}
+.video-footer .com-section{
+    font-size: 2rem;
+    width: 12rem;
+    display: flex;
+    justify-content: space-evenly;
+}
