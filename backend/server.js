@@ -1,5 +1,8 @@
-// -- importing the app from app.js to use further to create the server and initialize.
 const app = require("./app");
+const { connectDatabase } = require("./config/database");
+
+// connecting to database function.
+connectDatabase();
 
 // -- listing the server from the port specified in environment variable
 app.listen(process.env.PORT, () => {
