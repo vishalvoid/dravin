@@ -2,6 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const Post = require("./routes/PostRoutes");
+const User = require("./routes/UserRoutes");
 
 // -- specifying the path of dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // initializing the first user route.
 app.use("/api/v1", Post);
+app.use("/api/v1", User);
 
 // -- exporting the app.
 module.exports = app;

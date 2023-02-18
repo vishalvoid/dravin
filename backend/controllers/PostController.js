@@ -10,6 +10,7 @@ exports.createPost = async (req, res) => {
       },
       owner: req.user._id,
     };
+
     const post = await Post.create(newPost);
 
     res.status(201).json({
