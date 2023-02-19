@@ -19,17 +19,27 @@ exports.register = async (req, res) => {
       });
     }
 
-    await User.create({
+    const data = await User.create({
       name,
       email,
       password,
       avatar: { public_id: "default public id", url: "default link url" },
     });
 
-    res.status(201).json({
-      status: "success",
-      message: "Registration Successfull ",
-    });
+    const token = await jwttoken(data._id);
+    const options = {
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
+
+    res
+      .status(201)
+      .cookie("token", token, options)
+      .json({
+        status: "success",
+        message: `Welcome ${name}, Registration Successfull`,
+        token,
+      });
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -66,9 +76,14 @@ exports.login = async (req, res) => {
     }
 
     const token = await jwttoken(check_email._id);
+    const options = {
+      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    };
 
-    res.status(200).cookie("token", token).json({
+    res.status(200).cookie("token", token, options).json({
       status: "success",
+      message: check_email.name,
       token,
     });
   } catch (error) {
