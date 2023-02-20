@@ -1,9 +1,10 @@
 const Post = require("../models/PostSchema");
 const User = require("../models/UserSchema");
 
+//////////----------CREATE POST----------//////////
+
 exports.createPost = async (req, res) => {
   try {
-    console.log(req.user);
     const newPost = {
       caption: req.body.caption,
       image: {
@@ -33,8 +34,105 @@ exports.createPost = async (req, res) => {
   }
 };
 
+//////////----------LIKE & DISLIKE----------//////////
+
 exports.LikeDislike = async (req, res) => {
   try {
-    const postID = req.params.id;
-  } catch (error) {}
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Post Not Found",
+      });
+    }
+
+    if (post.likes.includes(req.body._id)) {
+      const index = post.likes.indexOf(req.user._id);
+      post.likes.splice(index, 1);
+
+      await post.save();
+
+      return res.status(200).json({
+        status: "success",
+        message: "Unliked",
+      });
+    } else {
+      post.likes.push(req.user._id);
+      await post.save();
+
+      return res.status(200).json({
+        status: "success",
+        message: "Liked",
+      });
+    }
+  } catch (error) {
+    res.status(401).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+//////////----------DELETE POST----------//////////
+
+exports.deletePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const user = await User.findById(req.user._id);
+
+    if (!post) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Post Not Found",
+      });
+    }
+
+    if (post.owner.toString() != req.user._id.toString()) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Unauthorized",
+      });
+    }
+
+    const index = user.posts.indexOf(req.params.id);
+    user.posts.splice(index, 1);
+
+    await post.remove();
+    await user.save();
+
+    res.status(200).json({
+      status: "fail",
+      message: "Post Deleted",
+    });
+  } catch (error) {
+    res.status(401).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+//////////----------FOLLOWING'S POST----------//////////
+
+exports.followingPost = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    const post = await Post.find({
+      owner: {
+        $in: user.following,
+      },
+    });
+
+    res.status(200).json({
+      status: "success",
+      post,
+    });
+  } catch (error) {
+    res.status(401).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
 };
