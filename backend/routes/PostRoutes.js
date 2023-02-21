@@ -4,6 +4,7 @@ const {
   LikeDislike,
   deletePost,
   followingPost,
+  addComment,
 } = require("../controllers/PostController");
 
 const { isAuthenticated } = require("../utils/authentication");
@@ -18,7 +19,6 @@ router
   .delete(isAuthenticated, deletePost);
 
 router.route("/following").get(isAuthenticated, followingPost);
-
-
+router.route("/post/comment/:id").post(isAuthenticated, addComment);
 
 module.exports = router;

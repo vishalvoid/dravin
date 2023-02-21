@@ -6,8 +6,10 @@ const {
   logout,
   updatePassword,
   updateprofile,
-  MyProfile,
+  getMyProfile,
   deleteProfile,
+  getUserProrfile,
+  getAllUsers,
 } = require("../controllers/UserController");
 const { isAuthenticated } = require("../utils/authentication");
 
@@ -19,7 +21,9 @@ router.route("/follow/:id").get(isAuthenticated, follow);
 router.route("/logout").get(isAuthenticated, logout);
 router.route("/update/password").post(isAuthenticated, updatePassword);
 router.route("/update/profile").patch(isAuthenticated, updateprofile);
-router.route("/my/profile").get(isAuthenticated, MyProfile);
 router.route("/delete/profile").delete(isAuthenticated, deleteProfile);
+router.route("/me").get(isAuthenticated, getMyProfile);
+router.route("/user/:id").get(getUserProrfile);
+router.route("/users").get(isAuthenticated, getAllUsers);
 
 module.exports = router;

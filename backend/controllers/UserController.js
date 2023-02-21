@@ -182,7 +182,7 @@ exports.updatePassword = async (req, res) => {
     }
 
     const correctpassword = await user.match_password(currentPassword);
-    console.log(correctpassword);
+   
 
     if (correctpassword) {
       user.password = newPassword;
@@ -292,7 +292,7 @@ exports.deleteProfile = async (req, res) => {
 
 //////////----------GET PROFILE----------//////////
 
-exports.MyProfile = async (req, res) => {
+exports.getMyProfile = async (req, res) => {
   try {
     const profile = await User.findById(req.user._id).populate("posts");
 
@@ -301,7 +301,43 @@ exports.MyProfile = async (req, res) => {
       profile,
     });
   } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.getUserProrfile = async (req, res) => {
+  try {
+    const profile = await User.findById(req.params.id).populate("posts");
+    if (!profile) {
+      return res.status(400).json({
+        status: "fail",
+        message: "profile Not Found",
+      });
+    }
     res.status(200).json({
+      status: "success",
+      message: profile,
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.getAllUsers = async (req, res) => {
+  try {
+    const profile = await User.find({});
+    res.status(200).json({
+      status: "success",
+      message: profile,
+    });
+  } catch (error) {
+    res.status(400).json({
       status: "fail",
       message: error.message,
     });

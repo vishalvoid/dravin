@@ -1,4 +1,5 @@
 const Post = require("../models/PostSchema");
+const { findById } = require("../models/UserSchema");
 const User = require("../models/UserSchema");
 
 //////////----------CREATE POST----------//////////
@@ -129,6 +130,53 @@ exports.followingPost = async (req, res) => {
       status: "success",
       post,
     });
+  } catch (error) {
+    res.status(401).json({
+      status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.addComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Post Not Found",
+      });
+    }
+
+    let Index = -1;
+
+    post.comments.forEach((item, index) => {
+      if (item.user.toString() == req.user._id.toString()) {
+        Index = index;
+      }
+    });
+
+    if (Index >= 0) {
+      post.comments[Index].comment = req.body.message;
+      await post.save();
+
+      return res.status(200).json({
+        status: "success",
+        message: "Comment Modified",
+      });
+    } else {
+      post.comments.push({
+        user: req.user._id,
+        comment: req.body.message,
+      });
+      await post.save();
+
+      res.status(200).json({
+        status: "success",
+        message: "Comment Added",
+      });
+    }
   } catch (error) {
     res.status(401).json({
       status: "fail",
