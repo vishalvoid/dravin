@@ -64,15 +64,15 @@ exports.login = async (req, res) => {
       });
     }
 
-    const check_email = await User.findOne({ email }).select("+password");
-    if (!check_email) {
+    const user = await User.findOne({ email }).select("+password");
+    if (!user) {
       return res.status(400).json({
         status: "fail",
         message: `${email} is not registered with us. Register Now!`,
       });
     }
 
-    const isMatched = await check_email.match_password(password);
+    const isMatched = await user.match_password(password);
     if (!isMatched) {
       return res.status(400).json({
         status: "fail",
@@ -80,7 +80,7 @@ exports.login = async (req, res) => {
       });
     }
 
-    const token = await jwttoken(check_email._id);
+    const token = await jwttoken(user._id);
     const options = {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       httpOnly: true,
@@ -88,7 +88,8 @@ exports.login = async (req, res) => {
 
     res.status(200).cookie("token", token, options).json({
       status: "success",
-      message: check_email.name,
+      message: user.name,
+      user,
       token,
     });
   } catch (error) {
@@ -182,7 +183,6 @@ exports.updatePassword = async (req, res) => {
     }
 
     const correctpassword = await user.match_password(currentPassword);
-   
 
     if (correctpassword) {
       user.password = newPassword;
