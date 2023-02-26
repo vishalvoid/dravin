@@ -331,10 +331,10 @@ exports.getUserProrfile = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const profile = await User.find({});
+    const users = await User.find({});
     res.status(200).json({
       status: "success",
-      message: profile,
+      users: users.reverse(),
     });
   } catch (error) {
     res.status(400).json({

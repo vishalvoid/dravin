@@ -18,7 +18,7 @@ router
   .get(isAuthenticated, LikeDislike)
   .delete(isAuthenticated, deletePost);
 
-router.route("/following").get(isAuthenticated, followingPost);
+router.route("/posts").get(isAuthenticated, followingPost);
 router.route("/post/comment/:id").post(isAuthenticated, addComment);
 
 module.exports = router;

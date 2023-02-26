@@ -120,15 +120,15 @@ exports.followingPost = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
 
-    const post = await Post.find({
+    const posts = await Post.find({
       owner: {
         $in: user.following,
       },
-    });
+    }).populate("owner likes comments.user");
 
     res.status(200).json({
       status: "success",
-      post,
+      posts: posts.reverse(),
     });
   } catch (error) {
     res.status(401).json({

@@ -16,7 +16,7 @@
   margin: 2% 10% 2% 20%;
   width: 70%;
   background-color: #e1e1e1;
-  border-radius: 3px;
+  border-radius: 0.5rem;
   max-height: 40rem;
 }
 
@@ -39,6 +39,7 @@
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   gap: 10px;
+  border-radius: 0.5rem;
 }
 
 .tile-container .tile-1 .box .box-header.dark {
@@ -48,30 +49,43 @@
 .tile-container .tile-1 .box .box-header figure {
   height: 30px;
   width: 30px;
-  margin-left: 2%;
+  margin-left: 3%;
 }
 
 .tile-container .tile-1 .box .box-header figure img {
-  height: 25px;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
-  margin-top: 3px;
 }
 
 .tile-container .tile-1 .box .box-header p {
-  flex-grow: 1;
   text-align: left;
-  margin-left: 3px;
+  margin-left: 2px;
+  font-weight: 700;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.9rem;
+  transform: translateY(2px);
+}
+.tile-container .tile-1 .box .box-header .caption {
+  color: rgb(95, 95, 95);
+  font-weight: 100;
+  font-size: 0.8rem;
+}
+.tile-container .tile-1 .box .box-header i {
+  position: absolute;
+  margin-left: 25.5rem;
+  transform: translateY(2px);
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  padding: 5px;
+  transition: all 0.2s;
+}
+
+.tile-container .tile-1 .box .box-header i:hover {
+  background-color: rgb(199, 199, 199);
 }
 
 .tile-container .tile-1 .box .box-header.dark p {
-  color: #e1e1e1;
-}
-
-.tile-container .tile-1 .box .box-header i {
-  margin-right: 0.5rem;
-}
-
-.tile-container .tile-1 .box .box-header i {
   color: #e1e1e1;
 }
 
@@ -184,8 +198,8 @@
 }
 
 .tile-2 .tile-2-child .side-box .sb-content .image-container img {
-  max-width: 100%;
-  object-fit: contain;
+  width: 100%;
+  object-fit: cover;
 }
 
 .tile-2 .tile-2-child .side-box .sb-content .title {
@@ -275,12 +289,66 @@ article.nextSlide {
   gap: 0.5rem;
   align-items: center;
   text-decoration: none;
-  color: black;
+  color: grey;
   font-family: Arial, Helvetica, sans-serif;
+  transition: all 0.3s;
 }
 
 .friends_button img {
   width: 40px;
   height: 40px;
   border-radius: 5rem;
+}
+
+.friends_button:hover {
+  transform: translateY(-5px);
+  color: black;
+}
+
+.postName__header {
+  text-decoration: none;
+  color: black;
+}
+
+.likes {
+  position: absolute;
+  transform: translateY(8px);
+  text-indent: 1rem;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.delete {
+  position: absolute;
+  left: 51%;
+  border: none;
+  background-color: transparent;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  padding: 5px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.delete:hover {
+  color: red;
+  background-color: rgb(191, 191, 191);
+}
+
+.post_liked--buttons {
+  border: none;
+  font-size: 1.5rem;
+  background-color: transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.post_liked--buttons:hover {
+  transform: translateY(-3px);
+  transform: scale(1.1);
+}
+
+.bi.bi-heart-fill {
+  color: red;
 }

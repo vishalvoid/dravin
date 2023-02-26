@@ -20,7 +20,9 @@ function App() {
   return (
     <>
       {isAuthenticated && <Navigation />}
+
       <Routes>
+        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />

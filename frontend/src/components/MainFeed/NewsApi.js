@@ -36,12 +36,6 @@ function NewsApi(props) {
   }, [index]);
   return (
     <div className="tile-2-child">
-      {/* <div className={`side-box ${props.theme}`}>
-          <div className={`sb-header ${props.theme}`}>
-            <p className={`sb-head ${props.theme}`}>What's happening?</p>
-          </div>
-          <div className="sb-content"></div>
-        </div> */}
       <div className={`side-box ${props.theme}`}>
         <div className={`sb-header ${props.theme}`}>
           <p className={`sb-head ${props.theme}`}>
