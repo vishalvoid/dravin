@@ -28,7 +28,6 @@ function NewsApi(props) {
   useEffect(() => {
     let slider = setInterval(() => {
       setIndex(index + 1);
-      console.log(slider);
     }, 5000);
     return () => {
       clearInterval(slider);
@@ -41,14 +40,14 @@ function NewsApi(props) {
           <p className={`sb-head ${props.theme}`}>
             {" "}
             <i
-              class="bi bi-chevron-double-left"
+              className="bi bi-chevron-double-left"
               onClick={() => {
                 setIndex(index - 1);
               }}
             ></i>
             # News Headlines
             <i
-              class="bi bi-chevron-double-right"
+              className="bi bi-chevron-double-right"
               onClick={() => {
                 setIndex(index + 1);
               }}
@@ -68,7 +67,7 @@ function NewsApi(props) {
             }
 
             return (
-              <article className={position} key={created_date}>
+              <article className={position} key={indexNews}>
                 <div className="image-container">
                   <img
                     src={

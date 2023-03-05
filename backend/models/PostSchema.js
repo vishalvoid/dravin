@@ -21,10 +21,8 @@ const postSchema = new mongoose.Schema({
   // number of likes the post has.
   likes: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   ],
   // // comments the post has.

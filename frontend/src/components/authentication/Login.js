@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Auth.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../actions/UserAction";
+import { useAlert } from "react-alert";
 
 function Login() {
   const dispatch = useDispatch();
@@ -19,10 +20,19 @@ function Login() {
     });
   };
 
+  const alert = useAlert();
+  const { error, user } = useSelector((state) => state.user);
+
   const handleOnClick = async (e) => {
     e.preventDefault();
     const { email, password } = data;
-    dispatch(loginUserAction(email, password));
+    await dispatch(loginUserAction(email, password));
+    if (!error) {
+      alert.success(`welcome ${user.name}`);
+    }
+    if (error) {
+      alert.error(error);
+    }
   };
 
   return (

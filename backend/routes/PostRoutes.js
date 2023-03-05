@@ -19,6 +19,6 @@ router
   .delete(isAuthenticated, deletePost);
 
 router.route("/posts").get(isAuthenticated, followingPost);
-router.route("/post/comment/:id").post(isAuthenticated, addComment);
+router.route("/post/comment/:id").put(isAuthenticated, addComment);
 
 module.exports = router;

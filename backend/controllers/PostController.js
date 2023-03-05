@@ -1,3 +1,4 @@
+const { populate } = require("../models/PostSchema");
 const Post = require("../models/PostSchema");
 const { findById } = require("../models/UserSchema");
 const User = require("../models/UserSchema");
@@ -42,34 +43,37 @@ exports.LikeDislike = async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (!post) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Post Not Found",
+      return res.status(404).json({
+        success: false,
+        message: "Post not found",
       });
     }
+    console.log(post.likes);
 
-    if (post.likes.includes(req.body._id)) {
+    if (post.likes.includes(req.user._id)) {
       const index = post.likes.indexOf(req.user._id);
+
       post.likes.splice(index, 1);
 
       await post.save();
 
       return res.status(200).json({
-        status: "success",
-        message: "Unliked",
+        success: true,
+        message: "Post Unliked",
       });
     } else {
       post.likes.push(req.user._id);
+
       await post.save();
 
       return res.status(200).json({
-        status: "success",
-        message: "Liked",
+        success: true,
+        message: "Post Liked",
       });
     }
   } catch (error) {
-    res.status(401).json({
-      status: "fail",
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -120,7 +124,7 @@ exports.followingPost = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
 
-    const posts = await Post.find({
+    let posts = await Post.find({
       owner: {
         $in: user.following,
       },
@@ -141,6 +145,7 @@ exports.followingPost = async (req, res) => {
 exports.addComment = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    console.log(post);
 
     if (!post) {
       return res.status(401).json({

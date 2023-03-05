@@ -64,7 +64,9 @@ exports.login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email })
+      .select("+password")
+      .populate("following followers");
     if (!user) {
       return res.status(400).json({
         status: "fail",
@@ -86,12 +88,14 @@ exports.login = async (req, res) => {
       httpOnly: true,
     };
 
-    res.status(200).cookie("token", token, options).json({
-      status: "success",
-      message: user.name,
-      user,
-      token,
-    });
+    res
+      .status(200)
+      .cookie("token", token, options)
+      .json({
+        status: "success",
+        user,
+        message: `welcome ${user.name}`,
+      });
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -294,11 +298,13 @@ exports.deleteProfile = async (req, res) => {
 
 exports.getMyProfile = async (req, res) => {
   try {
-    const profile = await User.findById(req.user._id).populate("posts");
+    const user = await User.findById(req.user._id).populate(
+      "posts followers following"
+    );
 
     res.status(200).json({
       status: "success",
-      profile,
+      user,
     });
   } catch (error) {
     res.status(400).json({
@@ -339,6 +345,31 @@ exports.getAllUsers = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
+      message: error.message,
+    });
+  }
+};
+
+exports.getMyPosts = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    const posts = [];
+
+    for (let i = 0; i < user.posts.length; i++) {
+      const post = await Post.findById(user.posts[i]).populate(
+        "likes comments.user owner"
+      );
+      posts.push(post);
+    }
+
+    res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }

@@ -10,6 +10,7 @@ const {
   deleteProfile,
   getUserProrfile,
   getAllUsers,
+  getMyPosts,
 } = require("../controllers/UserController");
 const { isAuthenticated } = require("../utils/authentication");
 
@@ -25,5 +26,6 @@ router.route("/delete/profile").delete(isAuthenticated, deleteProfile);
 router.route("/me").get(isAuthenticated, getMyProfile);
 router.route("/user/:id").get(getUserProrfile);
 router.route("/users").get(isAuthenticated, getAllUsers);
+router.route("/my/posts").get(isAuthenticated, getMyPosts);
 
 module.exports = router;

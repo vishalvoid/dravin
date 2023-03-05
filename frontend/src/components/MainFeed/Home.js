@@ -8,7 +8,7 @@ import Post from "./Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, getFollowingPosts } from "../../actions/UserAction";
 import Loader from "../../Loader/Loader";
-import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 function Home(props) {
   const [apiData, setapiData] = useState("");
@@ -20,7 +20,9 @@ function Home(props) {
   const { users, loading: userLoading } = useSelector(
     (state) => state.allUsers
   );
-  console.log(users);
+
+  const alert = useAlert();
+  const { error: errorLikes, message } = useSelector((state) => state.like);
 
   useEffect(() => {
     axios
@@ -32,6 +34,21 @@ function Home(props) {
     dispatch(getFollowingPosts());
     dispatch(getAllUsers());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (errorLikes) {
+      alert.error(errorLikes);
+      dispatch({ type: "clearErrors" });
+    }
+    if (error) {
+      alert.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+    if (message) {
+      alert.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [error, message, alert, dispatch, errorLikes]);
 
   return (
     <>
@@ -51,7 +68,7 @@ function Home(props) {
                   postImage={apiData.message}
                   likes={post.likes}
                   comments={post.comments}
-                  ownerImage={post.owner.avatar.url}
+                  ownerImage={"post.owner.avatar.url"}
                   ownerName={post.owner.name}
                   ownerID={post.owner._id}
                 ></Post>

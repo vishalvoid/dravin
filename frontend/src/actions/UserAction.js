@@ -16,8 +16,6 @@ export const loginUserAction = (email, password) => async (dispatch) => {
       }
     );
 
-    console.log(data);
-
     dispatch({
       type: "LoginSuccess",
       payload: data.user,
@@ -37,8 +35,6 @@ export const loadUserAction = () => async (dispatch) => {
     });
 
     const { data } = await axios.get("/api/v1/me", {});
-
-    console.log(data);
 
     dispatch({
       type: "LoadUserSuccess",
@@ -87,6 +83,44 @@ export const getAllUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "allUsersFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const getMyPosts = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "myPostsRequest",
+    });
+
+    const { data } = await axios.get("/api/v1/my/posts");
+    dispatch({
+      type: "myPostsSuccess",
+      payload: data.posts,
+    });
+  } catch (error) {
+    dispatch({
+      type: "myPostsFailure",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const logoutUser = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "LogoutUserRequest",
+    });
+
+    await axios.get("/api/v1/logout");
+
+    dispatch({
+      type: "LogoutUserSucess",
+    });
+  } catch (error) {
+    dispatch({
+      type: "LogoutUserFailure",
       payload: error.response.data.message,
     });
   }

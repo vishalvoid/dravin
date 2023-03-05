@@ -8,12 +8,12 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
   LoginSuccess: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.user = action.payload;
     state.isAuthenticated = true;
   },
   LoginFailure: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.error = action.payload;
     state.isAuthenticated = false;
   },
@@ -23,12 +23,12 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
   RegisterSuccess: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.user = action.payload;
     state.isAuthenticated = true;
   },
   RegisterFailure: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.error = action.payload;
     state.isAuthenticated = false;
   },
@@ -38,14 +38,29 @@ export const userReducer = createReducer(initialState, {
     state.isAuthenticated = false;
   },
   LoadUserSuccess: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.user = action.payload;
     state.isAuthenticated = true;
   },
   LoadUserFailure: (state, action) => {
-    state.loading = true;
+    state.loading = false;
     state.error = action.payload;
     state.isAuthenticated = false;
+  },
+
+  LogoutUserRequest: (state) => {
+    state.loading = true;
+    state.isAuthenticated = false;
+  },
+  LogoutUserSuccess: (state, action) => {
+    state.loading = false;
+    state.user = null;
+    state.isAuthenticated = false;
+  },
+  LogoutUserFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+    state.isAuthenticated = true;
   },
 });
 

@@ -28,12 +28,12 @@ function Navbar(props) {
           <Link className="text-link" to="/" onClick={() => settab("/")}>
             {tab === "/" ? (
               <div className="nav-clicked">
-                <i class="bi bi-house-fill"></i>
+                <i className="bi bi-house-fill"></i>
                 <p className="nav__heading">Home</p>
               </div>
             ) : (
               <div className="nav">
-                <i class="bi bi-house"></i>
+                <i className="bi bi-house"></i>
                 <p className="nav__heading">Home</p>
               </div>
             )}
@@ -48,12 +48,12 @@ function Navbar(props) {
           >
             {tab === "/search" ? (
               <div className="nav-clicked">
-                <i class="bi bi-zoom-in"></i>
+                <i className="bi bi-zoom-in"></i>
                 <p className="nav__heading">Search</p>
               </div>
             ) : (
               <div className="nav">
-                <i class="bi bi-search"></i>
+                <i className="bi bi-search"></i>
                 <p className="nav__heading">Search</p>
               </div>
             )}
@@ -68,12 +68,12 @@ function Navbar(props) {
           >
             {tab === "/videocall" ? (
               <div className="nav-clicked">
-                <i class="bi bi-person-video"></i>
+                <i className="bi bi-person-video"></i>
                 <p className="nav__heading">Video Call</p>
               </div>
             ) : (
               <div className="nav">
-                <i class="bi bi-camera-video"></i>
+                <i className="bi bi-camera-video"></i>
                 <p className="nav__heading">Video Call</p>
               </div>
             )}
@@ -88,12 +88,12 @@ function Navbar(props) {
           >
             {tab === "/message" ? (
               <div className="nav-clicked">
-                <i class="bi bi-chat-dots-fill"></i>
+                <i className="bi bi-chat-dots-fill"></i>
                 <p className="nav__heading">Message</p>
               </div>
             ) : (
               <div className="nav">
-                <i class="bi bi-chat"></i>
+                <i className="bi bi-chat"></i>
                 <p className="nav__heading">Message</p>
               </div>
             )}
@@ -104,7 +104,7 @@ function Navbar(props) {
 
         <Link
           className="text-link"
-          to="/profile"
+          to="/account"
           onClick={() => settab("/user")}
         >
           <div className="nav__footer">

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { loadUserAction } from "./actions/UserAction";
 import "./App.css";
+import Account from "./components/Account/Account";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import Home from "./components/MainFeed/Home";
@@ -23,9 +24,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route
+          path="/account"
+          element={isAuthenticated ? <Account /> : <Login />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
       </Routes>
     </>
   );
