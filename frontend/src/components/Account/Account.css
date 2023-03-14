@@ -89,3 +89,8 @@
 a {
   text-decoration: none;
 }
+
+.nopost {
+  text-align: center;
+  margin-top: 5rem;
+}

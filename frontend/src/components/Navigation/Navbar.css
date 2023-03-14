@@ -7,10 +7,10 @@
   height: 100%;
   padding: 1% 1%;
   box-sizing: border-box;
-  /* background-color: lightblue; */
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  z-index: 200;
 }
 
 img {
@@ -112,17 +112,26 @@ img {
   position: absolute;
   height: 4rem;
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid lightgray;
   bottom: 0;
   left: 0;
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
   gap: 0.5rem;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.nav__footer:hover {
+  background-color: rgb(196, 196, 196);
 }
 .profile__photo {
   width: 40px;
   height: 40px;
   border-radius: 20rem;
   overflow: hidden;
+}
+.name__name {
+  font-weight: 500;
+  font-family: sans-serif;
 }

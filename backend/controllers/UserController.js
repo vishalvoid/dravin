@@ -1,6 +1,7 @@
 const User = require("../models/UserSchema");
 const jwt = require("jsonwebtoken");
 const Post = require("../models/PostSchema");
+const cloudinary = require("cloudinary");
 
 const jwttoken = (_id) => {
   return jwt.sign({ _id }, process.env.JWT_SECRET);
@@ -10,39 +11,71 @@ const jwttoken = (_id) => {
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, avatar } = req.body;
+    const { name, email, password, image } = req.body;
+    if (image) {
+      const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+        folder: "avatar",
+      });
+    }
 
     // to check if email already exists
-    const user = await User.findOne({ email });
+    const user2 = await User.findOne({ email });
 
-    if (user) {
+    if (user2) {
       return res.status(400).json({
         status: "fail",
         message: "user already Exists",
       });
     }
 
-    const data = await User.create({
-      name,
-      email,
-      password,
-      avatar: { public_id: "default public id", url: "default link url" },
-    });
-
-    const token = await jwttoken(data._id);
-    const options = {
-      expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
-    };
-
-    res
-      .status(201)
-      .cookie("token", token, options)
-      .json({
-        status: "success",
-        message: `Welcome ${name}, Registration Successfull`,
-        token,
+    if (image) {
+      const data = await User.create({
+        name,
+        email,
+        password,
+        avatar: { public_id: myCloud.public_id, url: myCloud.secure_url },
       });
+
+      const user = await User.findById(data._id);
+
+      const token = await jwttoken(data._id);
+      const options = {
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      };
+
+      res
+        .status(201)
+        .cookie("token", token, options)
+        .json({
+          status: "success",
+          user,
+          message: `Welcome ${name}, Registration Successfull`,
+        });
+    } else {
+      const data = await User.create({
+        name,
+        email,
+        password,
+      });
+
+      const user = await User.findById(data._id);
+
+      const token = await jwttoken(data._id);
+      const options = {
+        expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        httpOnly: true,
+      };
+
+      res
+        .status(201)
+        .cookie("token", token, options)
+        .json({
+          status: "success",
+          user,
+          message: `Welcome ${name}, Registration Successfull`,
+        });
+    }
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -178,24 +211,30 @@ exports.updatePassword = async (req, res) => {
   try {
     const user = await User.findById(req.user._id).select("+password");
 
-    const { currentPassword, newPassword } = req.body;
-    if (!currentPassword || !newPassword) {
+    const { oldPassword, newPassword } = req.body;
+    if (!oldPassword || !newPassword) {
       return res.status(400).json({
         status: "fail",
         message: "Current Password or Password cannot be blank",
       });
     }
 
-    const correctpassword = await user.match_password(currentPassword);
+    const correctpassword = await user.match_password(oldPassword);
 
     if (correctpassword) {
       user.password = newPassword;
       await user.save();
 
-      res.status(200).json({
-        status: "success",
-        message: "Password Updated Succesfully",
-      });
+      res
+        .status(200)
+        .cookie("token", null, {
+          expires: new Date(Date.now()),
+          httpOnly: true,
+        })
+        .json({
+          status: "success",
+          message: "Password Updated Succesfully",
+        });
     } else {
       res.status(200).json({
         status: "fail",
@@ -214,7 +253,7 @@ exports.updatePassword = async (req, res) => {
 
 exports.updateprofile = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, avatar } = req.body;
     const user = await User.findById(req.user._id);
 
     if (email == user.email) {
@@ -229,6 +268,16 @@ exports.updateprofile = async (req, res) => {
     }
     if (email) {
       user.email = email;
+    }
+    if (avatar) {
+      await cloudinary.v2.uploader.destroy(user.avatar.public_id);
+
+      const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+        folder: "avatar",
+      });
+
+      user.avatar.public_id = myCloud.public_id;
+      user.avatar.url = myCloud.secure_url;
     }
 
     await user.save();
@@ -316,16 +365,18 @@ exports.getMyProfile = async (req, res) => {
 
 exports.getUserProrfile = async (req, res) => {
   try {
-    const profile = await User.findById(req.params.id).populate("posts");
-    if (!profile) {
+    const user = await User.findById(req.params.id).populate(
+      "posts following followers"
+    );
+    if (!user) {
       return res.status(400).json({
         status: "fail",
-        message: "profile Not Found",
+        message: "user Not Found",
       });
     }
     res.status(200).json({
       status: "success",
-      message: profile,
+      user,
     });
   } catch (error) {
     res.status(400).json({
@@ -353,6 +404,31 @@ exports.getAllUsers = async (req, res) => {
 exports.getMyPosts = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
+
+    const posts = [];
+
+    for (let i = 0; i < user.posts.length; i++) {
+      const post = await Post.findById(user.posts[i]).populate(
+        "likes comments.user owner"
+      );
+      posts.push(post);
+    }
+
+    res.status(200).json({
+      success: true,
+      posts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+exports.getUserPosts = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
 
     const posts = [];
 

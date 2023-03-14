@@ -54,22 +54,24 @@ const Account = () => {
                   key={posts._id}
                   postID={posts._id}
                   caption={posts.caption}
-                  postImage={"no image"}
+                  postImage={posts.image.url}
                   likes={posts.likes}
                   comments={posts.comments}
-                  ownerImage={"posts.owner.avatar.url"}
+                  ownerImage={posts.owner.avatar.url}
                   ownerName={posts.owner.name}
                   ownerID={posts.owner._id}
+                  isAccount={true}
+                  isDelete={true}
                 ></Post>
               ))
             ) : (
-              <h2>You Don't Have Any Post</h2>
+              <h3 className="nopost">You Don't Have Any Post</h3>
             )}
           </div>
 
           <div className="tile-2">
             <div className="account__profile-picture">
-              <img src={"img"} alt="" />
+              <img src={user.avatar.url} alt="" />
             </div>
 
             <p className="account__name">{user.name}</p>
@@ -132,7 +134,9 @@ const Account = () => {
                     );
                   })
                 ) : (
-                  <p>You Don't have any followers</p>
+                  <div className="tile-2">
+                    <p>You don't have any post to show</p>
+                  </div>
                 )}
               </div>
             </div>

@@ -151,7 +151,7 @@
   margin: 18.5rem 2% 2% 2%;
   width: 15rem;
   max-height: 17rem;
-  background-color: #fff;
+  background-color: #f4f4f1;
   border-radius: 0.5rem;
   position: relative;
   overflow: auto;
@@ -298,6 +298,7 @@ article.nextSlide {
   width: 40px;
   height: 40px;
   border-radius: 5rem;
+  border: 1px solid blueviolet;
 }
 
 .friends_button:hover {
@@ -421,4 +422,8 @@ article.nextSlide {
   transition: all ease;
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.nopost {
+  text-align: center;
 }

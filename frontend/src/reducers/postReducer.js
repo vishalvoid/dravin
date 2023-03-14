@@ -14,6 +14,7 @@ export const likeReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
+
   addCommentRequest: (state) => {
     state.loading = true;
   },
@@ -25,6 +26,67 @@ export const likeReducer = createReducer(initialState, {
     state.loading = false;
     state.error = action.payload;
   },
+
+  newPostRequest: (state) => {
+    state.loading = true;
+  },
+  newPostSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  newPostFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  deletePostRequest: (state) => {
+    state.loading = true;
+  },
+
+  deletePostSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  deletePostFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
+  updateProfileRequest: (state) => {
+    state.loading = true;
+  },
+  updateProfileSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  updateProfileFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
+  updatePasswordRequest: (state) => {
+    state.loading = true;
+  },
+  updatePasswordSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  updatePasswordFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
+  followUserRequest: (state) => {
+    state.loading = true;
+  },
+  followUserSuccess: (state, action) => {
+    state.loading = false;
+    state.message = action.payload;
+  },
+  followUserFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
   clearErrors: (state) => {
     state.error = null;
   },

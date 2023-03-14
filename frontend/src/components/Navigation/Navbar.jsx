@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUserAction } from "../../actions/UserAction";
 
-function Navbar(props) {
+function Navbar() {
   const [tab, settab] = useState(window.location.pathname);
+  const dispatch = useDispatch();
+
+  // useEffect(async () => {
+  //   await dispatch(loadUserAction());
+  // }, [dispatch, loadUserAction]);
+
+  const { user } = useSelector((state) => state.user);
+
   return (
     <>
       <div className={`nav-area`}>
@@ -109,11 +119,10 @@ function Navbar(props) {
         >
           <div className="nav__footer">
             <div className="profile__photo">
-              <img src="./logo.gif" alt="" />
+              <img src={user.avatar.url} alt="" />
             </div>
             <div className="name">
-              <p className="name__name">Vishal Kumar Singh</p>
-              <button>Logout</button>
+              <p className="name__name">{user.name}</p>
             </div>
           </div>
         </Link>

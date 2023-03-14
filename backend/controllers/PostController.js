@@ -2,16 +2,21 @@ const { populate } = require("../models/PostSchema");
 const Post = require("../models/PostSchema");
 const { findById } = require("../models/UserSchema");
 const User = require("../models/UserSchema");
+const cloudinary = require("cloudinary");
 
 //////////----------CREATE POST----------//////////
 
 exports.createPost = async (req, res) => {
   try {
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+      folder: "posts",
+    });
+
     const newPost = {
       caption: req.body.caption,
       image: {
-        public_id: "public id string",
-        url: "public url string",
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
       },
       owner: req.user._id,
     };
@@ -20,13 +25,13 @@ exports.createPost = async (req, res) => {
 
     const user = await User.findById(req.user._id);
 
-    user.posts.push(post._id);
+    user.posts.unshift(post._id);
 
     await user.save();
 
     res.status(201).json({
       status: "success",
-      post,
+      message: "Post Created",
     });
   } catch (error) {
     res.status(400).json({
@@ -48,7 +53,6 @@ exports.LikeDislike = async (req, res) => {
         message: "Post not found",
       });
     }
-    console.log(post.likes);
 
     if (post.likes.includes(req.user._id)) {
       const index = post.likes.indexOf(req.user._id);
@@ -102,6 +106,8 @@ exports.deletePost = async (req, res) => {
 
     const index = user.posts.indexOf(req.params.id);
     user.posts.splice(index, 1);
+
+    await cloudinary.v2.uploader.destroy(post.image.public_id);
 
     await post.remove();
     await user.save();

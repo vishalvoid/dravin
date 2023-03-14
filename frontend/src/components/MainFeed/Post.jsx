@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addCommentOnPost, likePost } from "../../actions/postAction";
+import {
+  addCommentOnPost,
+  deletePost,
+  likePost,
+} from "../../actions/postAction";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import Friends from "./Friends";
-import { getFollowingPosts } from "../../actions/UserAction";
+import { getFollowingPosts, getMyPosts } from "../../actions/UserAction";
 import CommentCard from "./CommentCard";
 
 function Post({
@@ -17,8 +21,8 @@ function Post({
   ownerImage,
   ownerName,
   ownerID,
-  isDelete = true,
-  isAccount = false,
+  isDelete,
+  isAccount,
 }) {
   const [liked, setliked] = useState(false);
   const [likesUser, setlikesUser] = useState(false);
@@ -32,10 +36,15 @@ function Post({
     await dispatch(likePost(postID));
 
     if (isAccount) {
-      console.log("bring my post baby");
+      dispatch(getMyPosts());
     } else {
       dispatch(getFollowingPosts());
     }
+  };
+
+  const deletePostHandler = async () => {
+    await dispatch(deletePost(postID));
+    dispatch(getMyPosts());
   };
 
   useEffect(() => {
@@ -60,7 +69,7 @@ function Post({
     <div className={`box `}>
       <div className={`box-header `}>
         <figure>
-          <img src={postImage} alt="avatar" />
+          <img src={ownerImage} alt="avatar" />
         </figure>
         <Link className="postName__header" to={`/user/${ownerID}`}>
           <p>{ownerName}</p>
@@ -99,7 +108,7 @@ function Post({
         <i className="bi bi-send"></i>
 
         {isDelete ? (
-          <button className="delete">
+          <button onClick={deletePostHandler} className="delete">
             <i className="bi bi-trash"></i>
           </button>
         ) : null}
@@ -118,7 +127,7 @@ function Post({
                 <Friends
                   key={like._id}
                   userID={like._id}
-                  avatar="./logo.gif"
+                  avatar={like.avatar.url}
                   name={like.name}
                 />
               );

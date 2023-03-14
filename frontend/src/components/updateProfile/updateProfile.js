@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import "./Auth.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserAction, registerUserAction } from "../../actions/UserAction";
+import { loadUserAction, updateProfile } from "../../actions/UserAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
 
-function Register() {
+function UpdateProfile() {
   const [userData, setuserData] = useState({
     name: "",
     email: "",
-    password: "",
   });
 
-  const [image, setimage] = useState(null);
+  const [avatar, setimage] = useState(null);
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
-  const { loading, error, message } = useSelector((state) => state.user);
+
+  const { loading, error, user } = useSelector((state) => state.user);
+  const {
+    loading: updateLoading,
+    error: updateError,
+    message,
+  } = useSelector((state) => state.like);
 
   const reg_data = (event) => {
     const { value, name } = event.target;
@@ -29,14 +31,12 @@ function Register() {
       };
     });
   };
-  const { name, email, password } = userData;
+  const { name, email } = userData;
+
   const submitForm = async (e) => {
     e.preventDefault();
-    if (image) {
-      dispatch(registerUserAction(name, email, password, image));
-    } else {
-      dispatch(registerUserAction(name, email, password));
-    }
+    await dispatch(updateProfile(name, email, avatar));
+    dispatch(loadUserAction());
   };
 
   const handleImageChange = async (e) => {
@@ -62,14 +62,18 @@ function Register() {
       alert.error(error);
       dispatch({ type: "clearErrors" });
     }
-  }, [dispatch, alert, error, message]);
+    if (updateError) {
+      alert.error(updateError);
+      dispatch({ type: "clearErrors" });
+    }
+  }, [dispatch, alert, error, message, updateError]);
 
   return (
     <>
       <div className="Login-box">
         {/* <img className="Login-box_logo" src="./logo.gif" alt="logo"></img> */}
         <div className="leftbox">
-          <h1 className="Login-box__header">Register</h1>
+          <h1 className="Login-box__header">Profile</h1>
 
           <form method="POST">
             <div className="Login-box__form-content">
@@ -79,6 +83,7 @@ function Register() {
                 name="name"
                 value={userData.name}
                 type="text"
+                placeholder={user.name}
                 onChange={reg_data}
               />
             </div>
@@ -90,26 +95,7 @@ function Register() {
                 type="email"
                 onChange={reg_data}
                 name="email"
-              />
-            </div>
-            <div className="Login-box__form-content">
-              <label>Password</label>
-              <br></br>
-              <input
-                type="password"
-                value={userData.password}
-                onChange={reg_data}
-                name="password"
-              />
-            </div>
-            <div className="Login-box__form-content">
-              <label>Confirm password</label>
-              <br></br>
-              <input
-                type="password"
-                value={userData.confirmPassword}
-                onChange={reg_data}
-                name="confirmPassword"
+                placeholder={user.email}
               />
             </div>
 
@@ -127,32 +113,23 @@ function Register() {
 
             {/* <Link to="/login"> */}
             <button
-              disabled={loading}
+              disabled={updateLoading}
               className="btn-login"
               type="submit"
               onClick={submitForm}
             >
-              {loading && loading === true ? "Loading" : "Register"}
+              {updateLoading && updateLoading === true ? "Loading" : "Update"}
             </button>
             {/* </Link> */}
-            <p className="text-login">
-              Already have account ? <Link to="/login">Login</Link>
-            </p>
           </form>
         </div>
-        {image === null ? (
+        {avatar === null ? (
           <div className="rightbox">
-            <img src="https://picsum.photos/200/300/?blur=5" alt="" />
-            <div class="text">
-              <span class="text-1">
-                Every new friend is a <br></br>new adventure
-              </span>
-              <span class="text-2">Let's get connected</span>
-            </div>
+            <img src={user.avatar.url} alt="" />
           </div>
         ) : (
           <div className="rightbox">
-            <img src={image} alt=""></img>
+            <img src={avatar} alt=""></img>
           </div>
         )}
       </div>
@@ -160,4 +137,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default UpdateProfile;

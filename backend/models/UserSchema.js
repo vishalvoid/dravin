@@ -12,8 +12,15 @@ const userSchema = new mongoose.Schema({
     unique: [true, "email already exists"],
   },
   avatar: {
-    public_id: String,
-    url: String,
+    public_id: {
+      type: String,
+      default: "avatar/g4fhcqkunthzrlhfqdi4",
+    },
+    url: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/dv6m4bm7w/image/upload/v1678529175/avatar/g4fhcqkunthzrlhfqdi4.jpg",
+    },
   },
   password: {
     type: String,

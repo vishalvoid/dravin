@@ -65,16 +65,18 @@ function Home(props) {
                   key={post._id}
                   postID={post._id}
                   caption={post.caption}
-                  postImage={apiData.message}
+                  postImage={post.image.url}
                   likes={post.likes}
                   comments={post.comments}
-                  ownerImage={"post.owner.avatar.url"}
+                  ownerImage={post.owner.avatar.url}
                   ownerName={post.owner.name}
                   ownerID={post.owner._id}
                 ></Post>
               ))
             ) : (
-              <h2>follow Someone to see Their Posts.</h2>
+              <div className="box">
+                <h3 className="nopost">Make friends to get their Post.</h3>
+              </div>
             )}
           </div>
 
@@ -90,7 +92,7 @@ function Home(props) {
                     <Friends
                       key={user._id}
                       userID={user._id}
-                      avatar={apiData.message}
+                      avatar={user.avatar.url}
                       name={user.name}
                     />
                   ))
