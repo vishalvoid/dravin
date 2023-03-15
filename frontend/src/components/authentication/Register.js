@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Auth.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserAction, registerUserAction } from "../../actions/UserAction";
+import { registerUserAction } from "../../actions/UserAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [userData, setuserData] = useState({
@@ -16,8 +15,8 @@ function Register() {
   const [image, setimage] = useState(null);
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
-  const { loading, error, message } = useSelector((state) => state.user);
+
+  const { loading, error } = useSelector((state) => state.user);
 
   const reg_data = (event) => {
     const { value, name } = event.target;
@@ -54,15 +53,11 @@ function Register() {
   };
 
   useEffect(() => {
-    if (message) {
-      alert.success(message);
-      dispatch({ type: "clearMessage" });
-    }
     if (error) {
       alert.error(error);
       dispatch({ type: "clearErrors" });
     }
-  }, [dispatch, alert, error, message]);
+  }, [dispatch, alert, error]);
 
   return (
     <>
@@ -132,7 +127,7 @@ function Register() {
               type="submit"
               onClick={submitForm}
             >
-              {loading && loading === true ? "Loading" : "Register"}
+              {loading && loading === true ? "Please Wait..." : "Register"}
             </button>
             {/* </Link> */}
             <p className="text-login">
