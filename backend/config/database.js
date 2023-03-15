@@ -4,9 +4,9 @@ const mongoDB = process.env.DB_URL.replace(
   "<PASSWORD>",
   process.env.DB_PASSWORD
 );
-exports.connectDatabase = () => {
+exports.connectDatabase = async () => {
   mongoose.set("strictQuery", true);
-  mongoose
+  await mongoose
     .connect(mongoDB, { useNewUrlParser: true })
     .then((con) => console.log(`Database Connected : ${con.connection.host}`))
     .catch((error) => {
