@@ -4,7 +4,6 @@ import "./updatePassword.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUserAction, updatePassword } from "../../actions/UserAction";
 import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
 
 function UpdatePassword() {
   const [data, setdata] = useState({
@@ -22,7 +21,7 @@ function UpdatePassword() {
 
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
+
   const { user } = useSelector((state) => state.user);
   const { error, loading, message } = useSelector((state) => state.like);
 

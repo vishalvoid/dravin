@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loadUserAction } from "../../actions/UserAction";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [tab, settab] = useState(window.location.pathname);
-  const dispatch = useDispatch();
-
-  // useEffect(async () => {
-  //   await dispatch(loadUserAction());
-  // }, [dispatch, loadUserAction]);
 
   const { user } = useSelector((state) => state.user);
 
@@ -21,7 +15,7 @@ function Navbar() {
 
         <div className="header">
           <div className="header__logo">
-            <img src="/logo.gif" alt="" />
+            <img src="./logo.gif" alt="" />
           </div>
           <h1 className="header__heading">Dravin</h1>
         </div>

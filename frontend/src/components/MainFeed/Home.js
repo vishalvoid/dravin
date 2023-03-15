@@ -11,7 +11,6 @@ import Loader from "../../Loader/Loader";
 import { useAlert } from "react-alert";
 
 function Home(props) {
-  const [apiData, setapiData] = useState("");
   const dispatch = useDispatch();
   const { loading, post, error } = useSelector(
     (state) => state.postOfFollowing
@@ -23,12 +22,6 @@ function Home(props) {
 
   const alert = useAlert();
   const { error: errorLikes, message } = useSelector((state) => state.like);
-
-  useEffect(() => {
-    axios
-      .get("https://dog.ceo/api/breeds/image/random")
-      .then((res) => setapiData(res.data));
-  }, []);
 
   useEffect(() => {
     dispatch(getFollowingPosts());

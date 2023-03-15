@@ -62,7 +62,10 @@ export const loadUserAction = () => async (dispatch) => {
       type: "LoadUserRequest",
     });
 
-    const { data } = await axios.get("/api/v1/me", {});
+    const { data } = await axios.get(
+      "https://uninterested-bear-galoshes.cyclic.app/api/v1/me",
+      {}
+    );
 
     dispatch({
       type: "LoadUserSuccess",

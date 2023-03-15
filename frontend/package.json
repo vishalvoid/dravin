@@ -1,5 +1,5 @@
 {
-  "homepage": "https://vishalvoid.github.io/dravin/frontend/build/index.html",
+  "homepage": ".",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -19,15 +19,14 @@
     "react-responsive-modal": "^6.4.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "proxy": "https://uninterested-bear-galoshes.cyclic.app"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

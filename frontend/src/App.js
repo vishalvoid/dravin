@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUserAction());
-  }, []);
+  }, [dispatch, loadUserAction]);
 
   document.body.style.backgroundColor = "#f4f4f1";
 

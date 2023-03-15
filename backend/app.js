@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const Post = require("./routes/PostRoutes");
 const User = require("./routes/UserRoutes");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 // -- specifying the path of dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -12,6 +13,7 @@ dotenv.config({ path: "backend/config/config.env" });
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());

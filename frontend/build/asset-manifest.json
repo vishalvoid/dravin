@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/dravin/frontend/build/index.html/static/css/main.7ec07541.css",
-    "main.js": "/dravin/frontend/build/index.html/static/js/main.d898fa43.js",
-    "index.html": "/dravin/frontend/build/index.html/index.html",
-    "main.7ec07541.css.map": "/dravin/frontend/build/index.html/static/css/main.7ec07541.css.map",
-    "main.d898fa43.js.map": "/dravin/frontend/build/index.html/static/js/main.d898fa43.js.map"
+    "main.css": "./static/css/main.7ec07541.css",
+    "main.js": "./static/js/main.439f73d8.js",
+    "index.html": "./index.html",
+    "main.7ec07541.css.map": "./static/css/main.7ec07541.css.map",
+    "main.439f73d8.js.map": "./static/js/main.439f73d8.js.map"
   },
   "entrypoints": [
     "static/css/main.7ec07541.css",
-    "static/js/main.d898fa43.js"
+    "static/js/main.439f73d8.js"
   ]
 }

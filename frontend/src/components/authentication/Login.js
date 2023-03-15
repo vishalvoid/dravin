@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUserAction } from "../../actions/UserAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../Loader/Loader";
 
 function Login() {
   const dispatch = useDispatch();
