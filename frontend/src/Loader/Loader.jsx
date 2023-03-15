@@ -1,9 +1,12 @@
 import React from "react";
+import "./Loader.css";
 
 function Loader() {
   return (
     <div>
-      <h1>Loading</h1>
+      <div className="loadingPage">
+        <div className="loadingCircle"></div>
+      </div>
     </div>
   );
 }

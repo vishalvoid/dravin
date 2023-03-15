@@ -78,9 +78,15 @@ export default function UploadBar(props) {
             />
             <i onClick={handleClick} class="bi bi-images"></i>
 
-            <button disabled={loading} id="post-button">
-              Post
-            </button>
+            {loading ? (
+              <button disabled={loading} id="post-button">
+                Wait.
+              </button>
+            ) : (
+              <button disabled={loading} id="post-button">
+                Post
+              </button>
+            )}
           </div>
         </form>
       </div>

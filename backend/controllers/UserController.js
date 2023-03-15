@@ -388,14 +388,17 @@ exports.getUserProrfile = async (req, res) => {
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({
+      name: { $regex: req.query.name, $options: "i" },
+    });
+
     res.status(200).json({
-      status: "success",
+      success: true,
       users: users.reverse(),
     });
   } catch (error) {
-    res.status(400).json({
-      status: "fail",
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }

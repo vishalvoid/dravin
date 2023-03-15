@@ -122,6 +122,7 @@ function Navbar() {
               <img src={user.avatar.url} alt="" />
             </div>
             <div className="name">
+              <p>Profile</p>
               <p className="name__name">{user.name}</p>
             </div>
           </div>

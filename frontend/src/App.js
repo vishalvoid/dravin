@@ -8,6 +8,7 @@ import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import Home from "./components/MainFeed/Home";
 import Navigation from "./components/Navigation/Navbar";
+import Search from "./components/Search/Search";
 import UpdatePassword from "./components/updatePassword/UpdatePassword";
 import UpdateProfile from "./components/updateProfile/updateProfile";
 import UserProfile from "./components/UserProfile/UserProfile";
@@ -44,6 +45,10 @@ function App() {
         <Route
           path="/user/:id"
           element={isAuthenticated ? <UserProfile /> : <Login />}
+        />
+        <Route
+          path="/search"
+          element={isAuthenticated ? <Search /> : <Login />}
         />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
