@@ -57,7 +57,7 @@ function NewsApi(props) {
 
         <div className="sb-content">
           {apidata.map((a, indexNews) => {
-            const { multimedia, title, published_date, created_date, url } = a;
+            const { multimedia, title, published_date, url } = a;
             let position = "nextSlide";
             if (indexNews === index) {
               position = "activeSlide";
@@ -77,24 +77,25 @@ function NewsApi(props) {
                         multimedia[1].url
                       )
                     }
-                    alt=" Image not Available for this News"
+                    alt="Cannot Get"
                   />
                 </div>
                 <div className="title">
                   <p className="title-head">
-                    {title == ""
+                    {title === ""
                       ? "Get Realtime Updated News from all Around the World. ~ New York Times "
                       : title}
                   </p>
                   <p className="time">
-                    {published_date == ""
+                    {published_date === ""
                       ? "Date Not Availabe"
                       : published_date}
                   </p>
                   <a
-                    href={url == "" ? "404" : url}
+                    href={url === "" ? "404" : url}
                     target="_blank"
                     className="title-body"
+                    rel="noreferrer"
                   >
                     read more...
                   </a>

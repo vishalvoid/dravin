@@ -7,7 +7,7 @@ export const loginUserAction = (email, password) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      "/api/v1/login",
+      "https://uninterested-bear-galoshes.cyclic.app/api/v1/login",
       { email, password },
       {
         headers: {

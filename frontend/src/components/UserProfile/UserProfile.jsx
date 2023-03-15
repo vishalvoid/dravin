@@ -23,7 +23,7 @@ const UserProfile = () => {
 
   const {
     user,
-    loading: userLoading,
+
     error: userError,
   } = useSelector((state) => state.userProfile);
 

@@ -92,7 +92,7 @@ export default function UploadBar(props) {
       </div>
       {image && (
         <div className="imagepreview">
-          <marquee className="preview__text">This is a Preview Image </marquee>
+          <h3 className="preview__text">This is a Preview Image </h3>
           <img src={image} alt="" />
         </div>
       )}

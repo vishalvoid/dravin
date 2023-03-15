@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(loadUserAction());
-  }, [dispatch, loadUserAction]);
+  }, [dispatch]);
 
   document.body.style.backgroundColor = "#f4f4f1";
 
@@ -29,7 +29,7 @@ function App() {
       {isAuthenticated && <Navigation />}
 
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+        <Route path="./" element={isAuthenticated ? <Home /> : <Login />} />
         <Route
           path="/account"
           element={isAuthenticated ? <Account /> : <Login />}

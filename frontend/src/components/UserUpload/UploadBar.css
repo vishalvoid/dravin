@@ -94,7 +94,7 @@ input[type="text"] {
 .post-area {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 1.5rem;
 }
 

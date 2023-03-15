@@ -1,8 +1,7 @@
 import "./MainFeed.css";
 import UploadBar from "../UserUpload/UploadBar";
 import NewsApi from "./NewsApi";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Friends from "./Friends";
 import Post from "./Post";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +15,7 @@ function Home(props) {
     (state) => state.postOfFollowing
   );
 
-  const { users, loading: userLoading } = useSelector(
-    (state) => state.allUsers
-  );
+  const { users } = useSelector((state) => state.allUsers);
 
   const alert = useAlert();
   const { error: errorLikes, message } = useSelector((state) => state.like);
