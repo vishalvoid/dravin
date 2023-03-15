@@ -107,8 +107,8 @@ const UserProfile = () => {
                   ownerImage={posts.owner.avatar.url}
                   ownerName={posts.owner.name}
                   ownerID={posts.owner._id}
-                  isAccount={true}
-                  isDelete={true}
+                  isAccount={false}
+                  isDelete={false}
                 ></Post>
               ))
             ) : (
@@ -158,7 +158,7 @@ const UserProfile = () => {
                       className="hoverbtn-logout"
                       style={{ background: following ? "red" : "" }}
                     >
-                      {following ? "Unfollow" : "follow"}
+                      {following ? "Unfollow" : "Follow"}
                     </span>
                   </p>
                 )}

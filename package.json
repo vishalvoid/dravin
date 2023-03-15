@@ -2,9 +2,8 @@
   "name": "social_media",
   "version": "1.0.0",
   "description": "Social media app based on mern stack.",
-  "main": "server.js",
   "scripts": {
-    "dev": "nodemon start backend/server.js"
+    "start": "node backend/server.js"
   },
   "author": "Vishal Kumar Singh",
   "license": "ISC",
