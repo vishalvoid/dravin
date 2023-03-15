@@ -1,12 +1,12 @@
 {
   "homepage": "https://vishalvoid.github.io/dravin",
-  "name": "social_media",
+  "name": "dravin",
   "version": "1.0.0",
   "description": "Social media app based on mern stack.",
   "scripts": {
     "start": "node backend/server.js",
     "predeploy": "cd frontend && npm run build ",
-    "deploy": "gh-pages -d ./frontend/build"
+    "deploy": " cd frontend && gh-pages -d build"
   },
   "author": "Vishal Kumar Singh",
   "license": "ISC",
