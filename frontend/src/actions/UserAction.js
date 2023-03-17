@@ -7,7 +7,7 @@ export const loginUserAction = (email, password) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/login",
+      "/api/v1/login",
       { email, password },
       {
         headers: {
@@ -35,7 +35,7 @@ export const registerUserAction =
       });
 
       const { data } = await axios.post(
-        "https://uninterested-bear-galoshes.cyclic.app/api/v1/register",
+        "/api/v1/register",
         { name, email, password, image },
         {
           headers: {
@@ -62,10 +62,7 @@ export const loadUserAction = () => async (dispatch) => {
       type: "LoadUserRequest",
     });
 
-    const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/me",
-      {}
-    );
+    const { data } = await axios.get("/api/v1/me", {});
 
     dispatch({
       type: "LoadUserSuccess",
@@ -85,9 +82,7 @@ export const getFollowingPosts = () => async (dispatch) => {
       type: "postOfFollowingRequest",
     });
 
-    const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/posts"
-    );
+    const { data } = await axios.get("/api/v1/posts");
 
     dispatch({
       type: "postOfFollowingSuccess",
@@ -109,9 +104,7 @@ export const getAllUsers =
         type: "allUsersRequest",
       });
 
-      const { data } = await axios.get(
-        `https://uninterested-bear-galoshes.cyclic.app/api/v1/users?name=${name}`
-      );
+      const { data } = await axios.get(`/api/v1/users?name=${name}`);
       dispatch({
         type: "allUsersSuccess",
         payload: data.users,
@@ -130,9 +123,7 @@ export const getMyPosts = () => async (dispatch) => {
       type: "myPostsRequest",
     });
 
-    const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/my/posts"
-    );
+    const { data } = await axios.get("/api/v1/my/posts");
     dispatch({
       type: "myPostsSuccess",
       payload: data.posts,
@@ -151,9 +142,7 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutUserRequest",
     });
 
-    await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/logout"
-    );
+    await axios.get("/api/v1/logout");
 
     dispatch({
       type: "LogoutUserSucess",
@@ -173,7 +162,7 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/update/profile",
+      "/api/v1/update/profile",
       { name, email, avatar },
       {
         headers: {
@@ -202,7 +191,7 @@ export const updatePassword =
       });
 
       const { data } = await axios.post(
-        "https://uninterested-bear-galoshes.cyclic.app/api/v1/update/password",
+        "/api/v1/update/password",
         { oldPassword, newPassword },
         {
           headers: {
@@ -228,9 +217,7 @@ export const getUserPosts = (id) => async (dispatch) => {
       type: "userPostsRequest",
     });
 
-    const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/userposts/${id}`
-    );
+    const { data } = await axios.get(`/api/v1/userposts/${id}`);
     dispatch({
       type: "userPostsSuccess",
       payload: data.posts,
@@ -249,9 +236,7 @@ export const getUserProfile = (id) => async (dispatch) => {
       type: "userProfileRequest",
     });
 
-    const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/user/${id}`
-    );
+    const { data } = await axios.get(`/api/v1/user/${id}`);
     dispatch({
       type: "userProfileSuccess",
       payload: data.user,
@@ -270,9 +255,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
       type: "followUserRequest",
     });
 
-    const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/follow/${id}`
-    );
+    const { data } = await axios.get(`/api/v1/follow/${id}`);
     dispatch({
       type: "followUserSuccess",
       payload: data.message,

@@ -6,9 +6,7 @@ export const likePost = (id) => async (dispatch) => {
       type: "likeRequest",
     });
 
-    const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/post/${id}`
-    );
+    const { data } = await axios.get(`/api/v1/post/${id}`);
 
     dispatch({
       type: "likeSuccess",
@@ -29,7 +27,7 @@ export const addCommentOnPost = (id, comment) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/post/comment/${id}`,
+      `/api/v1/post/comment/${id}`,
       {
         message: comment,
       },
@@ -57,7 +55,7 @@ export const createNewPost = (caption, image) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/post/upload`,
+      `/api/v1/post/upload`,
       {
         caption,
         image,
@@ -85,9 +83,7 @@ export const deletePost = (id) => async (dispatch) => {
       type: "deletePostRequest",
     });
 
-    const { data } = await axios.delete(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/post/${id}`
-    );
+    const { data } = await axios.delete(`/api/v1/post/${id}`);
 
     dispatch({
       type: "deletePostSuccess",
