@@ -67,11 +67,14 @@ exports.register = async (req, res) => {
       const options = {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         httpOnly: true,
+        secure: true,
+        sameSite: "none",
       };
+      res.cookie("token", token, options);
 
       res
         .status(201)
-        .cookie("token", token, options)
+
         .json({
           status: "success",
           user,
@@ -125,21 +128,13 @@ exports.login = async (req, res) => {
       secure: true,
     };
 
-    res
-      .status(200)
-      .cookie("token", token, options)
-      .header(
-        "Set-Cookie",
-        `token=${token}`,
-        (sameSite = "none"),
-        (secure = true),
-        (expires = 31536000)
-      )
-      .json({
-        status: "success",
-        user,
-        message: `welcome ${user.name}`,
-      });
+    res.cookie("token", token, options);
+
+    res.status(200).json({
+      status: "success",
+      user,
+      message: `welcome ${user.name}`,
+    });
   } catch (error) {
     res.status(400).json({
       status: "fail",
