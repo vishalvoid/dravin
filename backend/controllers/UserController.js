@@ -128,7 +128,13 @@ exports.login = async (req, res) => {
     res
       .status(200)
       .cookie("token", token, options)
-      .header("Set-Cookie",`token`=token,sameSite="none", secure=true,expires=31536000, )
+      .header(
+        "Set-Cookie",
+        `token=${token}`,
+        (sameSite = "none"),
+        (secure = true),
+        (expires = 31536000)
+      )
       .json({
         status: "success",
         user,
