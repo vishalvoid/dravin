@@ -41,7 +41,7 @@ exports.register = async (req, res) => {
       const token = await jwttoken(data._id);
       const options = {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "none",
         secure: true,
       };
@@ -66,7 +66,7 @@ exports.register = async (req, res) => {
       const token = await jwttoken(data._id);
       const options = {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        httpOnly: true,
+        httpOnly: false,
         secure: true,
         sameSite: "none",
       };

@@ -16,6 +16,8 @@ export const loginUserAction = (email, password) => async (dispatch) => {
       }
     );
 
+    console.log(data.cookies);
+
     dispatch({
       type: "LoginSuccess",
       payload: data.user,
