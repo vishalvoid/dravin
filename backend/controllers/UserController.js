@@ -12,11 +12,6 @@ const jwttoken = (_id) => {
 exports.register = async (req, res) => {
   try {
     const { name, email, password, image } = req.body;
-    if (image) {
-      const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
-        folder: "avatar",
-      });
-    }
 
     // to check if email already exists
     const user2 = await User.findOne({ email });
@@ -29,6 +24,10 @@ exports.register = async (req, res) => {
     }
 
     if (image) {
+      const myCloud = await cloudinary.v2.uploader.upload(req.body.image, {
+        folder: "avatar",
+      });
+
       const data = await User.create({
         name,
         email,
@@ -123,6 +122,8 @@ exports.login = async (req, res) => {
     const token = await jwttoken(user._id);
     const options = {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: true,
     };
 
     res.cookie("token", token, options);
