@@ -14,6 +14,13 @@ exports.isAuthenticated = async (req, res, next) => {
 
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
 
+    if (!decoded._id) {
+      res.status(500).json({
+        status: "error",
+        message: "Kindly Login !",
+      });
+    }
+
     req.user = await User.findById(decoded._id);
 
     next();
