@@ -10,7 +10,10 @@ function NewsApi(props) {
   useEffect(() => {
     axios
       .get(
-        "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=MbAGWpZtPD4vOmTpoFwONWeEbTLVlWmP"
+        "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=MbAGWpZtPD4vOmTpoFwONWeEbTLVlWmP",
+        {
+          withCredentials: false,
+        }
       )
       .then((res) => setapiData(res.data.results));
   }, []);

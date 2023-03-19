@@ -13,7 +13,6 @@ export const loginUserAction = (email, password) => async (dispatch) => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       }
     );
 
@@ -24,7 +23,7 @@ export const loginUserAction = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "LoginFailure",
-      payload: error,
+      payload: error.response.data.message,
     });
   }
 };
