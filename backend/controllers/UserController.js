@@ -123,9 +123,9 @@ exports.login = async (req, res) => {
     const token = await jwttoken(user._id);
     const options = {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      httpOnly: true,
+      httpOnly: false,
       sameSite: "none",
-      secure: true,
+      secure: false,
     };
 
     res.cookie("token", token, options);
@@ -133,6 +133,7 @@ exports.login = async (req, res) => {
     res.status(200).json({
       status: "success",
       user,
+      cookie: token,
       message: `welcome ${user.name}`,
     });
   } catch (error) {
