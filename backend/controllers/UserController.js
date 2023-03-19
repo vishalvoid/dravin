@@ -351,9 +351,21 @@ exports.deleteProfile = async (req, res) => {
 
 exports.getMyProfile = async (req, res) => {
   try {
+    if (!req.user._id) {
+      return res.status(400).json({
+        status: "fail",
+        message: "You are not logged In",
+      });
+    }
     const user = await User.findById(req.user._id).populate(
       "posts followers following"
     );
+    if (!user) {
+      return res.status(400).json({
+        status: "fail",
+        message: "User Not Found",
+      });
+    }
 
     res.status(200).json({
       status: "success",
