@@ -123,7 +123,7 @@ exports.login = async (req, res) => {
     const token = await jwttoken(user._id);
     const options = {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      httpOnly: false,
+      httpOnly: true,
       sameSite: "none",
       secure: true,
     };
