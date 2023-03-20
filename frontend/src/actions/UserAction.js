@@ -151,7 +151,7 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutUserRequest",
     });
 
-    await axios.get(
+    await axios.post(
       "https://uninterested-bear-galoshes.cyclic.app/api/v1/logout",
       {}
     );
