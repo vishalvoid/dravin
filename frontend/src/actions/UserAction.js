@@ -152,7 +152,8 @@ export const logoutUser = () => async (dispatch) => {
     });
 
     await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/logout"
+      "https://uninterested-bear-galoshes.cyclic.app/api/v1/logout",
+      {}
     );
 
     dispatch({
