@@ -40,7 +40,7 @@ exports.register = async (req, res) => {
       const token = await jwttoken(data._id);
       const options = {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        httpOnly: false,
+        httpOnly: true,
         sameSite: "none",
         secure: true,
       };
@@ -65,7 +65,7 @@ exports.register = async (req, res) => {
       const token = await jwttoken(data._id);
       const options = {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        httpOnly: false,
+        httpOnly: true,
         secure: true,
         sameSite: "none",
       };
@@ -124,6 +124,7 @@ exports.login = async (req, res) => {
       expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       httpOnly: true,
       secure: true,
+      sameSite: "none",
     };
 
     res.cookie("token", token, options);
@@ -131,7 +132,7 @@ exports.login = async (req, res) => {
     res.status(200).json({
       status: "success",
       user,
-      cookie: token,
+
       message: `welcome ${user.name}`,
     });
   } catch (error) {
@@ -151,7 +152,7 @@ exports.logout = async (req, res) => {
       httpOnly: true,
     };
 
-    res.status(200).cookie("token", null, options).json({
+    res.status(200).cookie("token", "expiredToken", options).json({
       status: "success",
       message: "Logged Out Successfully",
     });
