@@ -150,9 +150,11 @@ exports.logout = async (req, res) => {
     const options = {
       expires: new Date(Date.now()),
       httpOnly: true,
+      sameSite: "none",
+      secure: true,
     };
 
-    res.clearCookie("token");
+    res.clearCookie("token", options);
 
     res.status(200).cookie("token", "expiredToken", options).json({
       status: "success",
