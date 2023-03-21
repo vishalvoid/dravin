@@ -152,6 +152,8 @@ exports.logout = async (req, res) => {
       httpOnly: true,
     };
 
+    res.clearCookie("token");
+
     res.status(200).cookie("token", "expiredToken", options).json({
       status: "success",
       message: "Logged Out Successfully",
