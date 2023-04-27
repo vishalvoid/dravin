@@ -21,16 +21,16 @@ app.use(cookieParser());
 // app.use(cors({ origin: "https://www.dravin.cf", credentials: true }));
 app.use(cors({ credentials: true }));
 
-// static files
-// app.use(express.static(path.join(__dirname, ".././frontend/build")));
-
-// app.get("*", function (req, res) {
-//   res.sendFile(path.join(__dirname, ".././frontend/build/index.html"));
-// });
-
 // initializing the first user route.
 app.use("/api/v1", Post);
 app.use("/api/v1", User);
+
+//static files
+app.use(express.static(path.join(__dirname, ".././frontend/build")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, ".././frontend/build/index.html"));
+});
 
 // -- exporting the app.
 module.exports = app;
