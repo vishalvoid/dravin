@@ -7,13 +7,13 @@ import Account from "./components/Account/Account";
 import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import Home from "./components/MainFeed/Home";
+import Messages from "./components/Messages/Messages";
 import Navigation from "./components/Navigation/Navbar";
 import Search from "./components/Search/Search";
 import TestComponent from "./components/testComponent/TestComponent";
 import UpdatePassword from "./components/updatePassword/UpdatePassword";
 import UpdateProfile from "./components/updateProfile/updateProfile";
 import UserProfile from "./components/UserProfile/UserProfile";
-
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +60,11 @@ function App() {
           exact
           path="/search"
           element={isAuthenticated ? <Search /> : <Login />}
+        />
+        <Route
+          exact
+          path="/message"
+          element={isAuthenticated ? <Messages /> : <Login />}
         />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />

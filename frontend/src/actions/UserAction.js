@@ -7,7 +7,7 @@ export const loginUserAction = (email, password) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/login",
+      "/api/v1/login",
       { email, password },
       {
         headers: {
@@ -35,7 +35,7 @@ export const registerUserAction =
       });
 
       const { data } = await axios.post(
-        "https://uninterested-bear-galoshes.cyclic.app/api/v1/register",
+        "/api/v1/register",
         { name, email, password, image },
         {
           headers: {
@@ -63,7 +63,7 @@ export const loadUserAction = () => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/me",
+      "/api/v1/me",
       {}
     );
 
@@ -86,7 +86,7 @@ export const getFollowingPosts = () => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/posts"
+      "/api/v1/posts"
     );
 
     dispatch({
@@ -110,7 +110,7 @@ export const getAllUsers =
       });
 
       const { data } = await axios.get(
-        `https://uninterested-bear-galoshes.cyclic.app/api/v1/users?name=${name}`
+        `/api/v1/users?name=${name}`
       );
       dispatch({
         type: "allUsersSuccess",
@@ -131,7 +131,7 @@ export const getMyPosts = () => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/my/posts"
+      "/api/v1/my/posts"
     );
     dispatch({
       type: "myPostsSuccess",
@@ -152,7 +152,7 @@ export const logoutUser = () => async (dispatch) => {
     });
 
     await axios.post(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/logout",
+      "/api/v1/logout",
       {}
     );
 
@@ -174,7 +174,7 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      "https://uninterested-bear-galoshes.cyclic.app/api/v1/update/profile",
+      "/api/v1/update/profile",
       { name, email, avatar },
       {
         headers: {
@@ -203,7 +203,7 @@ export const updatePassword =
       });
 
       const { data } = await axios.post(
-        "https://uninterested-bear-galoshes.cyclic.app/api/v1/update/password",
+        "/api/v1/update/password",
         { oldPassword, newPassword },
         {
           headers: {
@@ -230,7 +230,7 @@ export const getUserPosts = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/userposts/${id}`
+      `/api/v1/userposts/${id}`
     );
     dispatch({
       type: "userPostsSuccess",
@@ -251,7 +251,7 @@ export const getUserProfile = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/user/${id}`
+      `/api/v1/user/${id}`
     );
     dispatch({
       type: "userProfileSuccess",
@@ -272,7 +272,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.get(
-      `https://uninterested-bear-galoshes.cyclic.app/api/v1/follow/${id}`
+      `/api/v1/follow/${id}`
     );
     dispatch({
       type: "followUserSuccess",

@@ -87,7 +87,7 @@ function Home(props) {
                     />
                   ))
                 ) : (
-                  <h6>Users Not Available Yet</h6>
+                  <h6>Getting users....</h6>
                 )}
               </div>
             </div>
