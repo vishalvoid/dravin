@@ -21,10 +21,10 @@ app.use(cookieParser());
 // app.use(cors({ origin: "https://www.dravin.cf", credentials: true }));
 
 // static files
-app.use(express.static(path.join(__dirname, "./frontend/build")));
+app.use(express.static(path.join(__dirname, ".././frontend/build")));
 
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
+  res.sendFile(path.join(__dirname, ".././frontend/build/index.html"));
 });
 
 // initializing the first user route.
