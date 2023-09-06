@@ -17,3 +17,36 @@ export const userMessagesReducer = createReducer(initialState, {
     state.error = null;
   },
 });
+
+export const sendMessageReducer = createReducer(initialState, {
+  SendMessageRequest: (state) => {
+    state.loading = true;
+  },
+  SendMessageSuccess: (state, action) => {
+    state.loading = false;
+    state.chatBox = action.payload;
+  },
+  SendMessageFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  clearErrors: (state) => {
+    state.error = null;
+  },
+});
+export const fetchMessageReducer = createReducer(initialState, {
+  fetchMessageRequest: (state) => {
+    state.loading = true;
+  },
+  fetchMessageSuccess: (state, action) => {
+    state.loading = false;
+    state.chatBox = action.payload;
+  },
+  fetchMessageFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+  clearErrors: (state) => {
+    state.error = null;
+  },
+});

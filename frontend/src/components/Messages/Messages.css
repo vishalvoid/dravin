@@ -190,11 +190,16 @@
   width: 40px;
   height: 40px;
   border: 1px solid grey;
-
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.2s ease;
+}
+
+.send-msg:hover {
+  background-color: grey;
+  cursor: pointer;
 }
 
 .container-msg .chat-tab .chat-footer .send-msg i {
@@ -214,8 +219,11 @@
   display: inline;
   cursor: pointer;
 }
-form {
+.sendMessage_form {
   width: 100%;
+  display: inline;
+  display: flex;
+  margin-left: 40px;
 }
 
 .message_user-list--na {
