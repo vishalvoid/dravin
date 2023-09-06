@@ -7,4 +7,5 @@ const router = express.Router();
 router.route("/chatbox").post(isAuthenticated, accessChat);
 router.route("/chatbox").post(isAuthenticated, fetchChat);
 
+
 module.exports = router;

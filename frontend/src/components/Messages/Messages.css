@@ -217,3 +217,8 @@
 form {
   width: 100%;
 }
+
+.message_user-list--na {
+  margin: 10px;
+  text-align: center;
+}

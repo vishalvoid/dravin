@@ -7,6 +7,7 @@ const Chat = require("./routes/MessageRoutes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
+const Message = require("./routes/SendMessageRoutes");
 
 // -- specifying the path of dotenv file
 dotenv.config({ path: "backend/config/config.env" });
@@ -26,6 +27,7 @@ app.use(cors({ credentials: true }));
 app.use("/api/v1", Post);
 app.use("/api/v1", User);
 app.use("/api/v1", Chat);
+app.use("/api/v1", Message);
 
 //static files
 app.use(express.static(path.join(__dirname, ".././frontend/build")));

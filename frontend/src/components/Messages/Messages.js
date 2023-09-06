@@ -9,6 +9,9 @@ export default function Messages() {
   const [name, setName] = React.useState("");
   const { users, loading } = useSelector((state) => state.allUsers);
   const [selectedChat, setselectedChat] = useState();
+  const { chatBox } = useSelector((state) => state.chatBox);
+
+  console.log(chatBox);
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
@@ -33,7 +36,6 @@ export default function Messages() {
               placeholder="Search"
             />
             <button className="message__search-submit" type="submit ">
-              {" "}
               <i className="bi bi-search"></i>
             </button>
           </form>
@@ -49,17 +51,25 @@ export default function Messages() {
               />
             ))
           ) : (
-            <p>No users available</p>
+            <p className="message_user-list--na">No users available</p>
           )}
         </div>
       </div>
       <div className="chat-tab">
         <div className="friend-header">
           <div className="friend-header-img">
-            <img src={user.avatar.url} alt="" />
+            {users && chatBox ? (
+              <img src={chatBox.users[1].avatar.url} alt="" />
+            ) : (
+              <span></span>
+            )}
           </div>
           <div className="name">
-            <p className="friend-header-name">Dillin Nair</p>
+            {users && chatBox ? (
+              <p className="friend-header-name">{chatBox.users[1].name}</p>
+            ) : (
+              <span></span>
+            )}
           </div>
         </div>
         <div className="chat-window"></div>
