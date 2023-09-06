@@ -55,7 +55,7 @@
 }
 
 .container-msg .user-tab .search-bar .search-bar-component {
-  width: 90%;
+  width: 80%;
   height: 80%;
   border: none;
 
@@ -200,4 +200,20 @@
 .container-msg .chat-tab .chat-footer .send-msg i {
   font-size: 1.3rem;
   margin: 2px 2px 0 0;
+}
+
+.message_users-list {
+  width: 100%;
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.message__search-submit {
+  border: none;
+  background: transparent;
+  display: inline;
+  cursor: pointer;
+}
+form {
+  width: 100%;
 }

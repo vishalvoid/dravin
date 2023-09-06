@@ -4,6 +4,7 @@
   "description": "Social media app based on mern stack.",
   "scripts": {
     "start": "node backend/server.js",
+    "development": "nodemon backend/server.js",
     "dev": "concurrently \"npm start\" \"npm run frontend\" "
   },
   "author": "Vishal Kumar Singh",

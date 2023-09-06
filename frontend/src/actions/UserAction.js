@@ -63,7 +63,6 @@ export const loadUserAction = () => async (dispatch) => {
     });
 
     const { data } = await axios.get("/api/v1/me");
-    console.log(data);
 
     dispatch({
       type: "LoadUserSuccess",

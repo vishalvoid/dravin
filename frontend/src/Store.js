@@ -10,6 +10,7 @@ import {
   userReducer,
   userProfileReducer,
 } from "./reducers/userReducer";
+import { userMessagesReducer } from "./reducers/chatReducer";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     myPosts: myPostsReducer,
     userProfile: userProfileReducer,
     userPosts: userPostsReducer,
+    chatBox: userMessagesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

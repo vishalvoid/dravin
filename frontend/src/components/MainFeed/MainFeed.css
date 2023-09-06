@@ -427,3 +427,7 @@ article.nextSlide {
 .nopost {
   text-align: center;
 }
+
+.tile-2-child.news {
+  z-index: 100;
+}

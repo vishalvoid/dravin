@@ -1,13 +1,21 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./Messages.css";
 import MessageUser from "./MessageUser";
+import { getAllUsers } from "../../actions/UserAction";
 
 export default function Messages() {
   const { user } = useSelector((state) => state.user);
-  const { users } = useSelector((state) => state.allUsers);
+  const [name, setName] = React.useState("");
+  const { users, loading } = useSelector((state) => state.allUsers);
+  const [selectedChat, setselectedChat] = useState();
 
-  console.log(user);
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(getAllUsers(name));
+  };
+
   return (
     <div className="container-msg">
       <div className="user-tab">
@@ -16,21 +24,34 @@ export default function Messages() {
           <i className="bi bi-gear-fill"></i>
         </div>
         <div className="search-bar">
-          <input
-            className="search-bar-component"
-            type="text"
-            placeholder="Search"
-          />
-          <i className="bi bi-search"></i>
+          <form action="" onSubmit={submitHandler}>
+            <input
+              className="search-bar-component"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Search"
+            />
+            <button className="message__search-submit" type="submit ">
+              {" "}
+              <i className="bi bi-search"></i>
+            </button>
+          </form>
         </div>
 
-        {users && users.length > 0 ? (
-          users.map((users) => (
-            <MessageUser avatar={users.avatar.url} name={users.name} />
-          ))
-        ) : (
-          <p>No users available</p>
-        )}
+        <div className="message_users-list">
+          {users && users.length > 0 ? (
+            users.map((users) => (
+              <MessageUser
+                avatar={users.avatar.url}
+                name={users.name}
+                userID={users._id}
+              />
+            ))
+          ) : (
+            <p>No users available</p>
+          )}
+        </div>
       </div>
       <div className="chat-tab">
         <div className="friend-header">

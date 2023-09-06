@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const Post = require("./routes/PostRoutes");
 const User = require("./routes/UserRoutes");
+const Chat = require("./routes/MessageRoutes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const path = require("path");
@@ -24,6 +25,7 @@ app.use(cors({ credentials: true }));
 // initializing the first user route.
 app.use("/api/v1", Post);
 app.use("/api/v1", User);
+app.use("/api/v1", Chat);
 
 //static files
 app.use(express.static(path.join(__dirname, ".././frontend/build")));
