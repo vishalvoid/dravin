@@ -24,7 +24,7 @@ export const sendMessageReducer = createReducer(initialState, {
   },
   SendMessageSuccess: (state, action) => {
     state.loading = false;
-    state.chatBox = action.payload;
+    state.sendMessage = action.payload;
   },
   SendMessageFailure: (state, action) => {
     state.loading = false;
@@ -40,7 +40,7 @@ export const fetchMessageReducer = createReducer(initialState, {
   },
   fetchMessageSuccess: (state, action) => {
     state.loading = false;
-    state.chatBox = action.payload;
+    state.fetchMessage = action.payload;
   },
   fetchMessageFailure: (state, action) => {
     state.loading = false;

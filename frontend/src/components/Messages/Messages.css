@@ -144,6 +144,10 @@
 
 .container-msg .chat-tab .chat-window {
   height: 21rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .container-msg .chat-tab .chat-footer {
@@ -195,6 +199,7 @@
   align-items: center;
   justify-content: center;
   transition: 0.2s ease;
+  overflow: hidden;
 }
 
 .send-msg:hover {
@@ -229,4 +234,23 @@
 .message_user-list--na {
   margin: 10px;
   text-align: center;
+}
+
+.message_bubble {
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+.chat-tab {
+  padding: 0.5rem;
+}
+
+.chat-not-selected {
+  text-align: center;
+  margin-top: 35%;
+}
+
+.search-form {
+  width: 100%;
 }

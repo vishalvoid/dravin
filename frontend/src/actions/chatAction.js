@@ -51,7 +51,7 @@ export const sendMessageAction = (content, chatId) => async (dispatch) => {
 
     dispatch({
       type: "SendMessageSuccess",
-      payload: data.sendMessage,
+      payload: data.message,
       loading: false,
     });
   } catch (error) {
@@ -80,7 +80,7 @@ export const fetchMessageRequest = (chatId) => async (dispatch) => {
 
     dispatch({
       type: "fetchMessageSuccess",
-      payload: data.fetchMessage,
+      payload: data.message,
       loading: false,
     });
   } catch (error) {

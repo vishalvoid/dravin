@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Messages.css";
-import { createChatAction } from "../../actions/chatAction";
-import { useDispatch } from "react-redux";
+import {
+  createChatAction,
+  fetchMessageRequest,
+} from "../../actions/chatAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const MessageUser = ({ avatar, name, userID }) => {
   const dispatch = useDispatch();
+  const { chatBox } = useSelector((state) => state.chatBox);
 
   const accessChat = async (userID) => {
     await dispatch(createChatAction(userID));
+    dispatch(fetchMessageRequest(chatBox._id));
   };
 
   return (

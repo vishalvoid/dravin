@@ -56,7 +56,7 @@ exports.fetchAllMessage = async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      message,
+      message: message,
     });
   } catch (error) {
     res.status(400).json({
