@@ -6,6 +6,7 @@ export const createChatAction = (userID) => async (dispatch) => {
 
     dispatch({
       type: "ChatBoxRequest",
+      loading: true,
     });
 
     const { data } = await axios.post(
@@ -20,12 +21,14 @@ export const createChatAction = (userID) => async (dispatch) => {
 
     dispatch({
       type: "ChatBoxSuccess",
-      payload: data.message,
+      payload: data.chatbox,
+      loading: false,
     });
   } catch (error) {
     dispatch({
       type: "ChatBoxFailure",
       payload: error.response.data.message,
+      loading: false,
     });
   }
 };
