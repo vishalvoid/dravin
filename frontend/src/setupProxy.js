@@ -4,7 +4,7 @@ module.exports = function (app) {
     "/api",
     createProxyMiddleware({
       target: "https://uninterested-bear-galoshes.cyclic.app/",
-      // target: "http://localhost:8000/",
+      // target: "http://localhost:4000",
       changeOrigin: true,
     })
   );

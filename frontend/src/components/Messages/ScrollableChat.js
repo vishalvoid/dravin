@@ -5,6 +5,7 @@ import "./Messages.css";
 
 const ScrollableChat = ({ messages }) => {
   const { user } = useSelector((state) => state.user);
+
   return (
     <>
       <ScrollableFeed>
