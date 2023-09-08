@@ -29,7 +29,18 @@ cloudinary.config({
 
 // -- listing the server from the port specified in environment variable
 connectDatabase().then(() => {
-  app.listen(process.env.PORT, () => {
+  const server = app.listen(process.env.PORT, () => {
     console.log(`Server Running on port ${process.env.PORT}`);
+  });
+
+  const io = require("socket.io")(server, {
+    pingTimeout: 60000,
+    cors: {
+      origin: "http://localhost:3000",
+    },
+  });
+
+  io.on("connection", () => {
+    console.log("Connected to Socket.io");
   });
 });
